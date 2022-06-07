@@ -1,5 +1,6 @@
 package Tests;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,9 +20,18 @@ public class LoginTest {
         // accesam un URL
         Driver.get("http://demo.automationtesting.in/Index.html");
 
+        //maximize page
+        Driver.manage().window().maximize();
+
         //identificam butonul sign in
         WebElement SignInElement = Driver.findElement(By.id("btn1"));
         SignInElement.click();
+
+        //validam pagina de login
+
+        String expectedPage = "SignIn";
+        String actualPage = Driver.getTitle();
+        Assert.assertEquals("The expected page was displayed", expectedPage, actualPage);
 
         //identificam butonul de email
         WebElement EmailElement = Driver.findElement(By.xpath("//input[@placeholder='E mail']"));
@@ -33,8 +43,18 @@ public class LoginTest {
         String PasswordValue = "parola";
         PasswordElement.sendKeys(PasswordValue);
 
-        WebElement EnterInElement = Driver.findElement(By.id("enterbtn"));
-        EmailElement.click();
+        WebElement EnterElement = Driver.findElement(By.id("enterbtn"));
+        EnterElement.click();
 
+        //validam mesaj de eroare
+        WebElement messageElement = Driver.findElement(By.id("errormsg"));
+        String expectedError= "Invalid User Name or PassWord";
+        String actualError= messageElement.getText();
+        Assert.assertEquals("Text of the error displyed is not correct", expectedError, actualError);
+
+        //inchidem pagina
+        /*Driver.close();*/
+        Driver.quit();
+        // Diferenta intre close si quit: close inchide cate un tab si quit inchide toate paginile deodata
     }
 }
