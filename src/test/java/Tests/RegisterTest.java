@@ -1,5 +1,9 @@
 package Tests;
 
+import Objects.RegisterObject;
+import Pages.IndexPage;
+import Pages.RegisterPage;
+import base.Hooks;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.*;
@@ -9,13 +13,23 @@ import org.openqa.selenium.support.ui.Select;
 import java.sql.Driver;
 import java.util.List;
 
-public class RegisterTest {
+public class RegisterTest extends Hooks {
 
-    public WebDriver Driver;
 
-    @Test
+ @Test
+ public void registerTest() {
+  RegisterObject registerdata = new RegisterObject(testData);
 
-   public void registerTest(){
+  IndexPage indexPage = new IndexPage(getDriver());
+  indexPage.clickSkipSignIn();
+
+  RegisterPage registerPage = new RegisterPage(getDriver());
+  registerPage.registerValid(registerdata);
+ }
+}
+
+
+  /* public void registerTest(){
     System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
     Driver =new ChromeDriver();
     Driver.get ("http://demo.automationtesting.in/Index.html");
@@ -108,4 +122,4 @@ public class RegisterTest {
 
 
     }
-}
+}*/

@@ -1,19 +1,34 @@
 package Tests;
 
-import base.BaseTest;
-import org.junit.Assert;
+import Objects.LoginObject;
+import Pages.IndexPage;
+import Pages.LogInPage;
+import base.Hooks;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class LoginTest extends BaseTest {
+public class LogInTest extends Hooks {
 
     public WebDriver Driver;
 
     @Test
     public void MetodaLogin(){
+        LoginObject loginData = new LoginObject(testData);
+
+        IndexPage indexPage = new IndexPage(getDriver());
+        indexPage.clickSignIn();
+
+        //validam pagina de login
+        LogInPage loginPage = new LogInPage(getDriver());
+        loginPage.loginInvalidProcess(loginData);
+    }
+}
+
+
+
+
+
+
         /* setam diverul de chrome
         System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
         //deschidem un brower de chrome
@@ -25,7 +40,7 @@ public class LoginTest extends BaseTest {
         Driver.manage().window().maximize();*/
 
         //identificam butonul sign in
-        WebElement SignInElement = Driver.findElement(By.id("btn1"));
+       /* WebElement SignInElement = Driver.findElement(By.id("btn1"));
         SignInElement.click();
 
         //validam pagina de login
@@ -57,5 +72,3 @@ public class LoginTest extends BaseTest {
         /*Driver.close();*/
         /*Driver.quit();*/
         // Diferenta intre close si quit: close inchide cate un tab si quit inchide toate paginile deodata
-    }
-}

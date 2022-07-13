@@ -7,17 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BaseTest {
 
-    public WebDriver Driver;
-    @Before
-    public void setUp(){
+    private WebDriver Driver;
+    public void initiateDriver(){
         System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
         Driver = new ChromeDriver();
         Driver.get("http://demo.automationtesting.in/Index.html");
         Driver.manage().window().maximize();
     }
 
-    @After
-    public void Cleaner(){
-        Driver.quit();
-    }
+    public WebDriver getDriver(){return Driver;}
+
 }
